@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
 import styles from './login.css';
-import fbAuth from './firebaseApp.js';
+
+var auth = require('./firebaseApp.js').auth;
 
 class Login extends Component {
   constructor() {
@@ -17,6 +17,20 @@ class Login extends Component {
       userType: 'student',
       isStudent: true
     }
+    auth.onAuthStateChanged(user => {
+    	if(user){
+        console.log("signed inn");
+        this.setState({
+          loggedIn: true
+        });
+      }
+      if(!user) {
+        console.log("signed out");
+        this.setState({
+          loggedIn: false
+        });
+      }
+    });
   }
 
   changeLogin(event) {
@@ -72,12 +86,13 @@ class Login extends Component {
     if(this.state.userType === "student") {
       username += "@stud.ntnu.no";
     }
-    fbAuth.signInWithEmailAndPassword(username, password)
+    auth.signInWithEmailAndPassword(username, password)
       .catch(error => alert(error.message));
   }
 
   logout(event) {
     console.log("logging out...");    // TODO: remove, used for debugging
+    auth.signOut().catch(error => alert(error.message));
   }
 
   signup(event) {
@@ -156,8 +171,6 @@ function SignUp(props) {
   );
 }
 
-firebase.auth().onAuthStateChanged(user => {
-	console.log("signed inn");
-});
+//console.log(auth);
 
 export default Login;
