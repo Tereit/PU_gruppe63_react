@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        This is the REACT App!
+        <Login />
       </div>
     );
   }
