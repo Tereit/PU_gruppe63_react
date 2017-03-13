@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './login.css';
 
-var auth = require('./firebaseApp.js').auth;
+const firebase = require('./firebaseApp.js').firebase;
 
 class Login extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class Login extends Component {
       userType: 'student',
       isStudent: true
     }
-    auth.onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(user => {
     	if(user){
         console.log("signed inn");
         this.setState({
@@ -86,13 +86,13 @@ class Login extends Component {
     if(this.state.userType === "student") {
       username += "@stud.ntnu.no";
     }
-    auth.signInWithEmailAndPassword(username, password)
+    firebase.auth().signInWithEmailAndPassword(username, password)
       .catch(error => alert(error.message));
   }
 
   logout(event) {
     console.log("logging out...");    // TODO: remove, used for debugging
-    auth.signOut().catch(error => alert(error.message));
+    firebase.auth().signOut().catch(error => alert(error.message));
   }
 
   signup(event) {
