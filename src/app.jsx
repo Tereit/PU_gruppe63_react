@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Login from './login.jsx';
-import Lecture from './lecture.jsx';
 import Admin from './admin.jsx';
+import Professor from "./professor.jsx";
+import Student from "./student.jsx";
 
 const firebase = require('./firebaseApp.js').firebase;
 
@@ -10,22 +11,33 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false,
-      isAdmin: false
+			loggedIn: false,
+      isProfessor: false,
+			isStudent: false,
+      isAdmin: false,
     }
     firebase.auth().onAuthStateChanged(user => {
     	if(user){
-        console.log("signed inn");
-        this.setState({
-          loggedIn: true
-        });
-        if(user.email === "admintest@stud.ntnu.no") {
+				this.setState({
+					loggedIn: true
+				})
+				if(user.email.includes("@ntnu.no")){
+					this.setState({
+						isProfessor: true,
+					})
+				}
+        else if(user.email === "admintest@stud.ntnu.no") {
           this.setState({
             isAdmin: true
           });
         }
+				else{
+					this.setState({
+						isStudent: true,
+					})
+				}
       }
-      if(!user) {
+      else{
         console.log("signed out");
         this.setState({
           loggedIn: false
@@ -38,12 +50,17 @@ class App extends Component {
     if(this.state.loggedIn) {
       if(this.state.isAdmin) {
         return(<Admin />);
-      } else {
-        return(<Lecture />);
-      }
-    } else {
-      return(<Login />)
+			}
+			else if(this.state.isProfessor){
+				return(<Professor />)
+			}
+			else{
+				return(<Student />)
+			}
     }
+		else{
+			return(<Login />)
+		}
   }
   render() {
     return (
