@@ -26,14 +26,6 @@ class StudentPage extends Component{
         </div>
       </div>
       <div id = "mainContent">
-        /*{
-          if (this.state.selected == "lectures") {
-            <LecturesContent />
-          }
-          else if (this.state.selected == "subjects") {
-            <SubjectsContent />
-          }
-        }*/
       </div>
     </div>
     )
@@ -58,21 +50,22 @@ class LectureContent extends Component{
   }
 
   loadLectures(){
-    datebase.ref().child("")
     return(
-
-    )
+      <div></div>
+    );
   }
 
 
   load(){
     return(
-      <div> "Today" </div>
-      <div id = "lecturesToday">
+      <div>
+        <div> "Today" </div>
+        <div id = "lecturesToday">
+        </div>
+        <div> "Later:" </div>
+        <div id = "lecturesLater"></div>
       </div>
-      <div> "Later:" </div>
-      <div id = "lecturesLater"></div>
-    )
+    );
   }
 
   render(){
@@ -91,11 +84,13 @@ class SubjectsContent extends Component{
   }
   load(){
     return(
-      <div> "Your Subjects" </div>
-      <div id = "subscribedSubjects">
+      <div>
+        <div> "Your Subjects" </div>
+        <div id = "subscribedSubjects">
+        </div>
+        <div> "Other Subjects:" </div>
+        <div id = "notSubscribedSubjects"></div>
       </div>
-      <div> "Other Subjects:" </div>
-      <div id = "notSubscribedSubjects"></div>
     )
   }
 
