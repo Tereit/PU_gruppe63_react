@@ -8,10 +8,10 @@ var config = {
     messagingSenderId: "946578632705"
 };
 var fb = firebase.initializeApp(config);
-console.log(fb.auth());
 
 var auth = fb.auth();
 var database = fb.database();
 
 exports.auth = auth;
 exports.database = database;
+exports.firebase = fb;
