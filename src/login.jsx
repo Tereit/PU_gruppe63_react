@@ -17,20 +17,6 @@ class Login extends Component {
       userType: 'student',
       isStudent: true
     }
-    firebase.auth().onAuthStateChanged(user => {
-    	if(user){
-        console.log("signed inn");
-        this.setState({
-          loggedIn: true
-        });
-      }
-      if(!user) {
-        console.log("signed out");
-        this.setState({
-          loggedIn: false
-        });
-      }
-    });
   }
 
   changeLogin(event) {
