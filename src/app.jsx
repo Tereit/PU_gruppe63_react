@@ -12,9 +12,8 @@ class App extends Component {
     super();
     this.state = {
 			loggedIn: false,
-      isProfessor: false,
-			isStudent: false,
-      isAdmin: false,
+			userType: "",
+			uid: "",
     }
     firebase.auth().onAuthStateChanged(user => {
     	if(user){
@@ -23,17 +22,17 @@ class App extends Component {
 				})
 				if(user.email.includes("@ntnu.no")){
 					this.setState({
-						isProfessor: true,
+						userType: "professor",
 					})
 				}
         else if(user.email === "admintest@stud.ntnu.no") {
           this.setState({
-            isAdmin: true
+            userType: "admin"
           });
         }
 				else{
 					this.setState({
-						isStudent: true,
+						userType: "student",
 					})
 				}
       }
@@ -46,16 +45,26 @@ class App extends Component {
       this.load();
     });
   }
+
   load() {
     if(this.state.loggedIn) {
-      if(this.state.isAdmin) {
-        return(<Admin />);
+      if(this.state.userType == "admin") {
+        return(<Admin
+					uid = {this.state.uid}
+					userType = {this.state.userType}
+					/>);
 			}
-			else if(this.state.isProfessor){
-				return(<Professor />)
+			else if(this.state.userType == "professor"){
+				return(<Professor
+					uid = {this.state.uid}
+					userType = {this.state.userType}
+					/>)
 			}
 			else{
-				return(<Student />)
+				return(<Student
+					uid = {this.state.uid}
+					userType = {this.state.userType}
+					/>)
 			}
     }
 		else{
