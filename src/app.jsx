@@ -37,7 +37,6 @@ class App extends Component {
 				}
       }
       else{
-        console.log("signed out");
         this.setState({
           loggedIn: false
         });

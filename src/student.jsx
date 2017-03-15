@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
+import {logoutUser} from "./firebaseAPI";
 
 const firebase = require('./firebaseApp.js').firebase;
 const database = require('./firebaseApp.js').database;
 
 class StudentPage extends Component{
-  constructor(){
-    super(user);
+  constructor(props){
+    super(props);
     this.state = {
       selected: "lectures"
     }
   }
 
+	handleLogout(){
+		logoutUser().then(function(){
+			console.log("signed out sucsessfully")
+		})
+	}
+
   load(){
     return(
     <div id = "studentPage">
       <div id = "upperContent">
-
+				<button onClick={this.handleLogout}>Logout</button>
       </div>
       <div id = "selectContent">
         <div id="subjects">
@@ -41,8 +48,8 @@ class StudentPage extends Component{
 }
 
 class LectureContent extends Component{
-  constructor(user){
-    super();
+  constructor(props){
+    super(props);
     this.lectures = [];
     this.state = {
       user: user
@@ -76,8 +83,8 @@ class LectureContent extends Component{
 }
 
 class SubjectsContent extends Component{
-  constructor(user){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       user: user
     }

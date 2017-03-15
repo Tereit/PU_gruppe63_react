@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
+import {logoutUser} from "./firebaseAPI";
 
 export default class Professor extends Component {
+
+	handleLogout(){
+		logoutUser().then(function(){
+			console.log("signed out sucsessfully")
+		})
+	}
 
   render() {
     return (
       <div style={styles.container}>
-        <nav style={navbar}>
+        <nav style={styles.navbar}>
 					<span>Professor</span>
 				</nav>
-				<div style={centeredContainer}>
+				<div style={styles.centeredContainer}>
 					<p>Professor</p>
 				</div>
+				<button onClick={this.handleLogout}>Logout</button>
       </div>
     );
   }
