@@ -4,7 +4,7 @@ import {logoutUser} from "./firebaseAPI";
 export default class Professor extends Component {
 
 	handleLogout(){
-		logoutUser().then(function(){
+		logoutUser().then(() => {
 			console.log("signed out sucsessfully")
 		})
 	}
@@ -27,6 +27,7 @@ export default class Professor extends Component {
 const styles = {
 	container: {
 		flex: 1,
+		backgroundColor: "red",
 	},
 	navbar: {
 		flexDirection: "row",

@@ -22,17 +22,17 @@ class App extends Component {
 				})
 				if(user.email.includes("@ntnu.no")){
 					this.setState({
-						userType: "professor",
+						userType: "professors",
 					})
 				}
         else if(user.email === "admintest@stud.ntnu.no") {
           this.setState({
-            userType: "admin"
+            userType: "admins"
           });
         }
 				else{
 					this.setState({
-						userType: "student",
+						userType: "students",
 					})
 				}
       }
@@ -47,13 +47,13 @@ class App extends Component {
 
   load() {
     if(this.state.loggedIn) {
-      if(this.state.userType == "admin") {
+      if(this.state.userType == "admins") {
         return(<Admin
 					uid = {this.state.uid}
 					userType = {this.state.userType}
 					/>);
 			}
-			else if(this.state.userType == "professor"){
+			else if(this.state.userType == "professors"){
 				return(<Professor
 					uid = {this.state.uid}
 					userType = {this.state.userType}
